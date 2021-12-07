@@ -6,4 +6,5 @@ export const Colors = {
   titleText: "#00008b",
   describeText: "#353839",
   inputText: "#333333",
+  borderColor: "#5FA8D3",
 };

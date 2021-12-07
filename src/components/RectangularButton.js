@@ -1,10 +1,14 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 export const RectangularButton = ({ ...props }) => {
   return (
-    <TouchableOpacity style={styles(props.buttonStyle)} onPress={props.onPress}>
-      <Text>{props.title}</Text>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={styles(props.buttonStyle).buttonStyling}
+      onPress={props.onPress}
+    >
+      <Text style={styles(props.buttonStyle).text}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -17,7 +21,12 @@ const styles = (props) =>
       backgroundColor: props.backgroundColor,
       borderColor: "#000000",
       borderWidth: 2,
+      borderRadius: 5,
       alignItems: "center",
       justifyContent: "center",
+    },
+    text: {
+      fontSize: props.fontSize,
+      textAlign: "center",
     },
   });
