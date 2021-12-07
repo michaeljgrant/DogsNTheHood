@@ -1,1 +1,3 @@
 # DogsNTheHood
+
+## Project Outline
