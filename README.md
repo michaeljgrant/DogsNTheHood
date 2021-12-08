@@ -27,6 +27,7 @@ With that in mind the following project is aimed at delivering the following:
 - Expo-Keep-Awake
 - Expo-Constants
 - Android Studio
+- Yoga Playground
 - - - -
 ## About This Application
 - - - -
