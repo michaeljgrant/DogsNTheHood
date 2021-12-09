@@ -17,15 +17,19 @@ With that in mind the following project is aimed at delivering the following:
 
 - - - - 
 
-## Technologies and Languages Utilized
+## Technologies, Libraries and Languages Utilized
 - - - -
 - React-Native
-- React-Native-Paper
+  - React-Native-Paper
+  - React-Native-Navigation
+  - React-Native-Safe-Area-Context
 - Javascript
 - FireStore
 - Expo-CLI
-- Expo-Keep-Awake
-- Expo-Constants
+  - Expo-Keep-Awake
+  - Expo-Constants
+  - Expo-Google-Fonts
+  - Expo-Status-Bar
 - Android Studio
 - Yoga Playground
 - - - -
