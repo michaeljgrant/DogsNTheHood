@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { StyleSheet, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 // Util imports
 import { theme } from "./src/utils/theme/";
@@ -42,7 +42,7 @@ export default function App() {
     Raleway_400Regular,
   });
   // Login checker
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   if (!robotoLoaded || !ralewayLoaded) {
     return null;
@@ -61,17 +61,17 @@ export default function App() {
         <NavBarContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
-              toBarIcon: ({ color, size }) => {
-                let iconName;
+              tabBarIcon: ({ color, size }) => {
+                let iconName = "";
 
                 if (route.name === "Homepage") {
-                  iconName = "";
+                  iconName = "md-home-outline";
                 } else if (route.name === "Maps") {
                   iconName = "md-map";
                 } else if (route.name === "Profile") {
-                  iconName = "";
+                  iconName = "md-person-circle-outline";
                 } else if (route.name === "Settings") {
-                  iconName = "ios-settings-sharp";
+                  iconName = "md-settings";
                 }
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
