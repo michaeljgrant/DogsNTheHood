@@ -1,76 +1,87 @@
 import React, { useState } from "react";
-import { Colors } from "../utils/Colors";
-import { fontSizes } from "../utils/Sizes";
-import { View, Text, StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import { StatusBar, View, Text, SafeAreaView } from "react-native";
 import { InputField } from "../components/InputField";
 import { RectangularButton } from "../components/RectangularButton";
+import { colors } from "../utils/theme/colors";
+import { fontSizes, fonts, fontWeights } from "../utils/theme/fonts";
+// Styled components
+const SafeArea = styled(SafeAreaView)`
+  background-color: ${(props) => props.theme.colors.brand.secondary};
+  flex: 1;
+  ${StatusBar.currentHeight && `marginTop: ${StatusBar.currentHeight}px`};
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+`;
+const LoginForm = styled(View)`
+  background-color: ${(props) => props.theme.colors.brand.primary};
+  flex: 1;
+  width: 80%;
+  height: 80%;
+  padding: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 10px;
+`;
+const TitleContainer = styled(View)`
+  flex: 0.2;
+  align-items: center;
+  justify-content: center;
+`;
+const InputContainer = styled(View)`
+  flex: 0.5;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ButtonContainer = styled(View)`
+  flex: 0.2;
+  align-items: center;
+  justify-content: center;
+`;
+const Header = styled(Text)`
+  font-size: ${fontSizes.h1};
+  font-weight: ${fontWeights.regular};
+  font-family: ${fonts.heading};
+`;
 
 export const Login = ({ login }) => {
   const buttonStyle = {
     height: "65%",
     width: "80%",
-    backgroundColor: Colors.buttonConfirm,
-    fontSize: fontSizes.xxLrg,
+    backgroundColor: colors.ui.success,
+    fontSize: fontSizes.h3,
   };
   const inputStyle = {
     height: 100,
     width: 250,
-    borderColor: Colors.borderColor,
+    borderColor: colors.brand.border,
   };
   const confirmLogin = () => {
     login(true);
   };
   return (
-    <View style={styles.form}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Login</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <InputField inputStyle={inputStyle} label={"Username"} />
-        <InputField inputStyle={inputStyle} label={"Password"} />
-        <InputField inputStyle={inputStyle} label={"Confirm Password"} />
-      </View>
-      <View style={styles.buttonContainer}>
-        <RectangularButton
-          onPress={() => {
-            confirmLogin();
-          }}
-          buttonStyle={buttonStyle}
-          title="Login"
-        />
-      </View>
-    </View>
+    <SafeArea>
+      <LoginForm>
+        <TitleContainer>
+          <Header>Login</Header>
+        </TitleContainer>
+        <InputContainer>
+          <InputField inputStyle={inputStyle} label={"Username"} />
+          <InputField inputStyle={inputStyle} label={"Password"} />
+          <InputField inputStyle={inputStyle} label={"Confirm Password"} />
+        </InputContainer>
+        <ButtonContainer>
+          <RectangularButton
+            onPress={() => {
+              confirmLogin();
+            }}
+            buttonStyle={buttonStyle}
+            title="Login"
+          />
+        </ButtonContainer>
+      </LoginForm>
+    </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  form: {
-    backgroundColor: Colors.formBackground,
-    flex: 1,
-    width: "80%",
-    height: "80%",
-    padding: 50,
-    marginTop: 50,
-    marginBottom: 50,
-    borderRadius: 10,
-  },
-  title: {
-    fontSize: fontSizes.xxLrg,
-    color: Colors.titleText,
-  },
-  titleContainer: {
-    flex: 0.2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputContainer: {
-    flex: 0.5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonContainer: {
-    flex: 0.2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
