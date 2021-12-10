@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components/native";
-import { Ionicons } from "@expo/vector-icons";
-
 // Util imports
-import { theme } from "./src/utils/theme/";
 import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/utils/theme";
+import { Ionicons } from "@expo/vector-icons";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
 // Page imports
 import { Login } from "./src/pages/Login";
@@ -29,11 +28,6 @@ import {
 
 // Styled components
 
-const NavBarContainer = styled(NavigationContainer)`
-  padding-bottom: 10px;
-  background-color: ${(props) => props.theme.colors.brand.secondary};
-`;
-
 export default function App() {
   const [robotoLoaded] = useRoboto({
     Roboto_400Regular,
@@ -49,45 +43,42 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      theme={theme}
-    >
-      {loggedIn ? (
-        <NavBarContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                let iconName = "";
+    <>
+      <ThemeProvider theme={theme}>
+        {loggedIn ? (
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ color, size }) => {
+                  let iconName = "";
 
-                if (route.name === "Homepage") {
-                  iconName = "md-home-outline";
-                } else if (route.name === "Maps") {
-                  iconName = "md-map";
-                } else if (route.name === "Profile") {
-                  iconName = "md-person-circle-outline";
-                } else if (route.name === "Settings") {
-                  iconName = "md-settings";
-                }
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "blue",
-              tabBarInactiveTintColor: "gray",
-            })}
-          >
-            <Tab.Screen name="Homepage" component={Homepage} />
-            <Tab.Screen name="Maps" component={MapPage} />
-            <Tab.Screen name="Profile" component={ProfilePage} />
-            <Tab.Screen name="Settings" component={Settings} />
-          </Tab.Navigator>
-        </NavBarContainer>
-      ) : (
-        <Login login={setLoggedIn} />
-      )}
-    </ThemeProvider>
+                  if (route.name === "Homepage") {
+                    iconName = "md-home-outline";
+                  } else if (route.name === "Maps") {
+                    iconName = "md-map";
+                  } else if (route.name === "Profile") {
+                    iconName = "md-person-circle-outline";
+                  } else if (route.name === "Settings") {
+                    iconName = "md-settings";
+                  }
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                headerShown: false,
+                tabBarActiveTintColor: "#ff4500",
+                tabBarInactiveTintColor: "blue",
+              })}
+            >
+              <Tab.Screen name="Homepage" component={Homepage} />
+              <Tab.Screen name="Maps" component={MapPage} />
+              <Tab.Screen name="Profile" component={ProfilePage} />
+              <Tab.Screen name="Settings" component={Settings} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        ) : (
+          <Login />
+        )}
+        <ExpoStatusBar style="auto" />
+      </ThemeProvider>
+    </>
   );
 }

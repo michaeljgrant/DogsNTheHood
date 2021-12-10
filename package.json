@@ -30,7 +30,11 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "styled-components": "^5.3.3"
+  },
+  "peerDependencies": {
+    "styled-components":"^5.3.3"
   },
   "private": true
 }
