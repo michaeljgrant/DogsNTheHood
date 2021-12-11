@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { InputField } from "../components/InputField";
-import { RectangularButton } from "../components/RectangularButton";
+import React from "react";
+import { View, Text } from "react-native";
 
 export const Settings = () => {
   return (

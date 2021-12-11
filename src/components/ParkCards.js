@@ -8,9 +8,7 @@ const ParksCard = styled(Card)`
   margin-bottom: ${(props) => props.theme.space[4]};
 `;
 
-const ParksCardContent = styled(Card.Content)`
-  justify-content: "space-between";
-`;
+const ParksCardContent = styled(Card.Content)``;
 
 const ParksCardPhoto = styled(Card.Cover)`
   border-radius: 10px;
