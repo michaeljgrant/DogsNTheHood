@@ -6,6 +6,12 @@ import MapView from "react-native-maps";
 import styled from "styled-components/native";
 const SearchBarContainer = styled(View)`
   padding: 16px;
+  position: absolute;
+  z-index: 999;
+  top: 5px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
 const SafeArea = styled(SafeAreaView)`
   background-color: ${colors.brand.primary};
@@ -23,9 +29,7 @@ export const MapPage = () => {
       <SearchBarContainer>
         <Searchbar placeholder="Search" />
       </SearchBarContainer>
-      <View>
-        <MapArea></MapArea>
-      </View>
+      <MapArea></MapArea>
     </SafeArea>
   );
 };
