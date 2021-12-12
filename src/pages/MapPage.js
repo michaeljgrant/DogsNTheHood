@@ -27,7 +27,7 @@ export const MapPage = () => {
   return (
     <SafeArea>
       <SearchBarContainer>
-        <Searchbar placeholder="Search" />
+        <Searchbar icon="map" placeholder="Search" />
       </SearchBarContainer>
       <MapArea></MapArea>
     </SafeArea>

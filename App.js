@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as firebase from "firebase";
 // Util imports
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/utils/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { LoginContextProvider } from "./src/service/LoginContext";
 
 // Page imports
 import { Login } from "./src/pages/Login";
@@ -26,7 +28,18 @@ import {
   Roboto_400Regular,
 } from "@expo-google-fonts/roboto";
 
-// Styled components
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBFV4WJOlqpkuIKaRX0_-1Rg04j6ZGljA4",
+  authDomain: "dogsnthehood.firebaseapp.com",
+  projectId: "dogsnthehood",
+  storageBucket: "dogsnthehood.appspot.com",
+  messagingSenderId: "521099451334",
+  appId: "1:521099451334:web:5525485c00a481617ff0c7",
+};
+if (!firebase.apps.lenght) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const [robotoLoaded] = useRoboto({
@@ -41,11 +54,11 @@ export default function App() {
   if (!robotoLoaded || !ralewayLoaded) {
     return null;
   }
-
+  if (!isAuthenticated) return null;
   return (
     <>
       <ThemeProvider theme={theme}>
-        {loggedIn ? (
+        <LoginContextProvider>
           <NavigationContainer>
             <Tab.Navigator
               screenOptions={({ route }) => ({
@@ -74,11 +87,9 @@ export default function App() {
               <Tab.Screen name="Settings" component={Settings} />
             </Tab.Navigator>
           </NavigationContainer>
-        ) : (
-          <Login />
-        )}
-        <ExpoStatusBar style="auto" />
+        </LoginContextProvider>
       </ThemeProvider>
+      <ExpoStatusBar style="auto" />
     </>
   );
 }
