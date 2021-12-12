@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Title, Paragraph } from "react-native-paper";
 import styled from "styled-components/native";
+import { Ionicons } from "@expo/vector-icons";
 
 const ParksCard = styled(Card)`
   border-radius: 10px;
@@ -24,7 +25,8 @@ const ParkAddress = styled(Paragraph)`
 const ParkInfo = styled.View`
   padding: ${(props) => props.theme.space[3]};
 `;
-export const RestaurantInfo = ({ Park = {} }) => {
+const Stars = <Ionicons name="star" size={10} color="yellow" />;
+export const ParkCard = ({ Park = {} }) => {
   const {
     name = "Random Park",
     photos = [
@@ -40,6 +42,7 @@ export const RestaurantInfo = ({ Park = {} }) => {
           <ParksCardPhoto key={name} source={{ uri: photos[0] }} />
           <ParkInfo>
             <ParkName>{name}</ParkName>
+            {Stars}
             <ParkAddress>{address}</ParkAddress>
           </ParkInfo>
         </ParksCardContent>

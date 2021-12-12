@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar, SafeAreaView, FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
-import { RestaurantInfo } from "../components/ParkCards";
+import { ParkCard } from "../components/ParkCards";
 
 const SearchBarContainer = styled.View`
   margin: 8px 8px 5px 8px;
@@ -37,7 +37,7 @@ export const Homepage = () => {
       <ParkList>
         <FlatList
           data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
-          renderItem={() => <RestaurantInfo />}
+          renderItem={() => <ParkCard />}
           keyExtractor={(item) => item.name}
           contentContainerStyle={{ padding: 16 }}
         />

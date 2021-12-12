@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from "react";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app";
 // Util imports
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/utils/theme";
-import { Ionicons } from "@expo/vector-icons";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { LoginContextProvider } from "./src/service/LoginContext";
 
-// Page imports
-import { Login } from "./src/pages/Login";
-import { Homepage } from "./src/pages/Homepage";
-import { MapPage } from "./src/pages/MapPage";
-import { ProfilePage } from "./src/pages/ProfilePage";
-import { Settings } from "./src/pages/Settings";
-// Nav Imports
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-const Tab = createBottomTabNavigator();
+// Nav Import
+import { AppNavigator } from "./src/components/AppNavigation/AppNavigator";
 
 // Font imports
 import {
@@ -37,7 +28,8 @@ const firebaseConfig = {
   messagingSenderId: "521099451334",
   appId: "1:521099451334:web:5525485c00a481617ff0c7",
 };
-if (!firebase.apps.lenght) {
+
+if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
@@ -54,39 +46,12 @@ export default function App() {
   if (!robotoLoaded || !ralewayLoaded) {
     return null;
   }
-  if (!isAuthenticated) return null;
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <LoginContextProvider>
-          <NavigationContainer>
-            <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
-                  let iconName = "";
-
-                  if (route.name === "Homepage") {
-                    iconName = "md-home-outline";
-                  } else if (route.name === "Maps") {
-                    iconName = "md-map";
-                  } else if (route.name === "Profile") {
-                    iconName = "md-person-circle-outline";
-                  } else if (route.name === "Settings") {
-                    iconName = "md-settings";
-                  }
-                  return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                headerShown: false,
-                tabBarActiveTintColor: "#ff4500",
-                tabBarInactiveTintColor: "blue",
-              })}
-            >
-              <Tab.Screen name="Homepage" component={Homepage} />
-              <Tab.Screen name="Maps" component={MapPage} />
-              <Tab.Screen name="Profile" component={ProfilePage} />
-              <Tab.Screen name="Settings" component={Settings} />
-            </Tab.Navigator>
-          </NavigationContainer>
+          <AppNavigator />
         </LoginContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
