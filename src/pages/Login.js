@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components/native";
-import { StatusBar, View, Text, SafeAreaView } from "react-native";
-import { InputField } from "../components/InputField";
-import { RectangularButton } from "../components/RectangularButton";
-import { colors } from "../utils/theme/colors";
-import { fontSizes, fonts, fontWeights } from "../utils/theme/fonts";
+import {
+  AccountBack,
+  AuthInput,
+  AuthButton,
+} from "../components/LoggedOutBackground";
+import { LoginContext } from "../service/LoginContext";
 // Styled components
-const SafeArea = styled(SafeAreaView)`
-  background-color: ${(props) => props.theme.colors.brand.secondary};
-  flex: 1;
-  ${StatusBar.currentHeight && `marginTop: ${StatusBar.currentHeight}px`};
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-`;
-const LoginForm = styled(View)`
-  background-color: ${(props) => props.theme.colors.brand.primary};
+
+const LoginForm = styled.View`
+  background-color: ${(props) => props.theme.colors.brand.primary}aa;
   flex: 1;
   width: 80%;
   height: 80%;
@@ -24,64 +18,63 @@ const LoginForm = styled(View)`
   margin-bottom: 50px;
   border-radius: 10px;
 `;
-const TitleContainer = styled(View)`
+const TitleContainer = styled.View`
   flex: 0.2;
   align-items: center;
   justify-content: center;
 `;
-const InputContainer = styled(View)`
+const InputContainer = styled.View`
   flex: 0.5;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 `;
 
-const ButtonContainer = styled(View)`
+const ButtonContainer = styled.View`
   flex: 0.2;
   align-items: center;
   justify-content: center;
 `;
-const Header = styled(Text)`
-  font-size: ${fontSizes.h1};
-  font-weight: ${fontWeights.regular};
-  font-family: ${fonts.heading};
+const Header = styled.Text`
+  color: ${(props) => props.theme.colors.brand.secondary};
+  font-size: ${(props) => props.theme.fontSizes.h3};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  font-family: ${(props) => props.theme.fonts.heading};
 `;
 
 export const Login = ({ login }) => {
-  const buttonStyle = {
-    height: "65%",
-    width: "80%",
-    backgroundColor: colors.ui.success,
-    fontSize: fontSizes.h3,
-  };
-  const inputStyle = {
-    height: 100,
-    width: 250,
-    borderColor: colors.brand.border,
-  };
-  const confirmLogin = () => {
-    login(true);
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { onLogin, error } = useContext(LoginContext);
   return (
-    <SafeArea>
+    <AccountBack>
       <LoginForm>
         <TitleContainer>
           <Header>Login</Header>
         </TitleContainer>
         <InputContainer>
-          <InputField inputStyle={inputStyle} label={"Username"} />
-          <InputField inputStyle={inputStyle} label={"Password"} />
-          <InputField inputStyle={inputStyle} label={"Confirm Password"} />
+          <AuthInput
+            value={email}
+            textContentType="emailaddress"
+            keyboardType="email-address"
+            label={"Email"}
+          />
+          <AuthInput
+            textContentType="password"
+            value={password}
+            label={"Password"}
+          />
         </InputContainer>
         <ButtonContainer>
-          <RectangularButton
-            onPress={() => {
-              confirmLogin();
-            }}
-            buttonStyle={buttonStyle}
-            title="Login"
-          />
+          <AuthButton
+            onPress={() => {}}
+            mode="contained"
+            icon="lock-open-outline"
+          >
+            Login
+          </AuthButton>
         </ButtonContainer>
       </LoginForm>
-    </SafeArea>
+    </AccountBack>
   );
 };

@@ -43,6 +43,8 @@ export const AppNavigator = () => {
       </Tab.Navigator>
     </NavigationContainer>
   ) : (
-    <AccountNavigation />
+    <NavigationContainer>
+      <AccountNavigation />
+    </NavigationContainer>
   );
 };

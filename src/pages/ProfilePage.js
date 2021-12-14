@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import { SafeAreaView, Text, StatusBar } from "react-native";
 import { Avatar } from "react-native-paper";
-import { InputField } from "../components/InputField";
-import { RectangularButton } from "../components/RectangularButton";
 
 const UserName = styled(Text)`
   font-family: ${(props) => props.theme.fonts.heading};
