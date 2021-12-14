@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, SafeAreaView, View, Dimensions } from "react-native";
+import { StatusBar, SafeAreaView, View } from "react-native";
 import { colors } from "../utils/theme/colors";
 import { Searchbar } from "react-native-paper";
 import MapView from "react-native-maps";

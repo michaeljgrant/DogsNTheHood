@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
-export const LoginAuthenticator = (email, password) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export const LoginAuthenticator = (email, password) =>
+  firebase.auth().signInWithEmailAndPassword(email, password);
 
-  useEffect(() => {
-    firebase.auth().signInWithEmailAndPassword(email, password);
-  }, []);
-};
+export const RegisterAuthenticator = (email, password) =>
+  firebase.auth().createUserWithEmailAndPassword(email, password);
