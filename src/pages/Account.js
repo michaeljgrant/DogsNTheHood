@@ -5,10 +5,8 @@ import {
   AccountBackOverlay,
   AccountNavContainer,
   AuthButton,
-} from "../components/LoggedOutBackground";
-const SpaceBetween = styled.View`
-  padding: 15px;
-`;
+  SpaceBetween,
+} from "../components/AccountScreensTemplates";
 
 export const Account = ({ navigation }) => {
   return (
