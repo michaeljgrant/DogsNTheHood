@@ -4,6 +4,7 @@ import { colors } from "../utils/theme/colors";
 import { Searchbar } from "react-native-paper";
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
+
 const SearchBarContainer = styled(View)`
   padding: 16px;
   position: absolute;
