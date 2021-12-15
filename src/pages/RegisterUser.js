@@ -23,7 +23,7 @@ export const RegisterUser = ({ navigation }) => {
     <AccountBack>
       <LoginForm>
         <TitleContainer>
-          <Header>Login</Header>
+          <Header>Register</Header>
         </TitleContainer>
         <InputContainer>
           <AuthInput
