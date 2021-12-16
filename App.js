@@ -40,8 +40,6 @@ export default function App() {
   const [ralewayLoaded] = useRaleway({
     Raleway_400Regular,
   });
-  // Login checker
-  const [loggedIn, setLoggedIn] = useState(true);
 
   if (!robotoLoaded || !ralewayLoaded) {
     return null;

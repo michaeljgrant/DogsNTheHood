@@ -2,6 +2,7 @@ import React, { useState, createContext } from "react";
 import {
   LoginAuthenticator,
   RegisterAuthenticator,
+  LogoutAuthenticator,
 } from "./LoginAuthenticator";
 export const LoginContext = createContext();
 
@@ -38,6 +39,13 @@ export const LoginContextProvider = ({ children }) => {
         setError(err.toString());
       });
   };
+
+  const onLogout = () => {
+    LogoutAuthenticator().then(() => {
+      setUser(null);
+      setError(null);
+    });
+  };
   return (
     <LoginContext.Provider
       value={{
@@ -47,6 +55,7 @@ export const LoginContextProvider = ({ children }) => {
         error,
         onLogin,
         onRegister,
+        onLogout,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import { colors } from "../utils/theme/colors";
 import { Searchbar } from "react-native-paper";
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
+import { ParkMapCallout } from "../components/ParkMapCallout";
 
 const SearchBarContainer = styled(View)`
   padding: 16px;
@@ -14,6 +15,7 @@ const SearchBarContainer = styled(View)`
   justify-content: center;
   align-items: center;
 `;
+
 const SafeArea = styled(SafeAreaView)`
   background-color: ${colors.brand.primary};
   flex: 1;
@@ -24,13 +26,43 @@ const MapArea = styled(MapView)`
   width: 100%;
   height: 100%;
 `;
-export const MapPage = () => {
+export const MapPage = ({ navigation }) => {
   return (
     <SafeArea>
       <SearchBarContainer>
         <Searchbar icon="map" placeholder="Search" />
       </SearchBarContainer>
-      <MapArea></MapArea>
+      <MapArea
+        region={{
+          latitude: "",
+          longitude: "",
+          latitudeDelta: "",
+          longitudeDelta: 0.02,
+        }}
+      >
+        {dogParks.map((park) => {
+          return (
+            <MapView.Marker
+              key={park.name}
+              title={park.name}
+              coordinate={{
+                latitude: park.geometry.location.lat,
+                longitude: park.geometry.location.lng,
+              }}
+            >
+              <MapView.Callout
+                onPress={() =>
+                  navigation.navigate("MapDetail", {
+                    park,
+                  })
+                }
+              >
+                <ParkMapCallout park={park} />
+              </MapView.Callout>
+            </MapView.Marker>
+          );
+        })}
+      </MapArea>
     </SafeArea>
   );
 };

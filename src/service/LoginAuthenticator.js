@@ -6,3 +6,5 @@ export const LoginAuthenticator = (email, password) =>
 
 export const RegisterAuthenticator = (email, password) =>
   firebase.auth().createUserWithEmailAndPassword(email, password);
+
+export const LogoutAuthenticator = () => firebase.auth().signOut();
