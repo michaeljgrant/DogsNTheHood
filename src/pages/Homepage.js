@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StatusBar, SafeAreaView, FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 import { ParkCard } from "../components/ParkCards";
-
+import { LocationContext } from "../service/LocationContext";
 const SearchBarContainer = styled.View`
   margin: 8px 8px 5px 8px;
   justify-content: center;
@@ -29,10 +29,24 @@ const ParkList = styled.View`
 `;
 
 export const Homepage = () => {
+  const { keyword, search } = useContext(LocationContext);
+  const [searchKeyword, setSearchKeyword] = useState(keyword);
+  useEffect(() => {
+    setSearchKeyword(keyword);
+  }, [keyword]);
   return (
     <SafeArea>
       <SearchBarContainer>
-        <SearchBar placeholder="Search" />
+        <SearchBar
+          placeholder="Search"
+          value={searchKeyword}
+          onSubmitEditing={() => {
+            searchKeyword;
+          }}
+          onChangeText={(text) => {
+            setSearchKeyword(text);
+          }}
+        />
       </SearchBarContainer>
       <ParkList>
         <FlatList

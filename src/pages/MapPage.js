@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StatusBar, SafeAreaView, View } from "react-native";
 import { colors } from "../utils/theme/colors";
 import { Searchbar } from "react-native-paper";
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
 import { ParkMapCallout } from "../components/ParkMapCallout";
-
+import { LocationContext } from "../service/LocationContext";
 const SearchBarContainer = styled(View)`
   padding: 16px;
   position: absolute;
@@ -27,10 +27,25 @@ const MapArea = styled(MapView)`
   height: 100%;
 `;
 export const MapPage = ({ navigation }) => {
+  const { keyword, search } = useContext(LocationContext);
+  const [searchKeyword, setSearchKeyword] = useState(keyword);
+  useEffect(() => {
+    setSearchKeyword(keyword);
+  }, [keyword]);
   return (
     <SafeArea>
       <SearchBarContainer>
-        <Searchbar icon="map" placeholder="Search" />
+        <Searchbar
+          icon="map"
+          placeholder="Search"
+          value={searchKeyword}
+          onSubmitEditing={() => {
+            searchKeyword;
+          }}
+          onChangeText={(text) => {
+            setSearchKeyword(text);
+          }}
+        />
       </SearchBarContainer>
       <MapArea
         region={{
