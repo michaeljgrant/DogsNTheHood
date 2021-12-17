@@ -29,23 +29,23 @@ const ParkList = styled.View`
 `;
 
 export const Homepage = () => {
-  const { keyword, search } = useContext(LocationContext);
-  const [searchKeyword, setSearchKeyword] = useState(keyword);
-  useEffect(() => {
-    setSearchKeyword(keyword);
-  }, [keyword]);
+  // const { keyword, search } = useContext(LocationContext);
+  // const [searchKeyword, setSearchKeyword] = useState(keyword);
+  // useEffect(() => {
+  //   setSearchKeyword(keyword);
+  // }, [keyword]);
   return (
     <SafeArea>
       <SearchBarContainer>
         <SearchBar
           placeholder="Search"
-          value={searchKeyword}
-          onSubmitEditing={() => {
-            searchKeyword;
-          }}
-          onChangeText={(text) => {
-            setSearchKeyword(text);
-          }}
+          // value={searchKeyword}
+          // onSubmitEditing={() => {
+          //   searchKeyword;
+          // }}
+          // onChangeText={(text) => {
+          //   setSearchKeyword(text);
+          // }}
         />
       </SearchBarContainer>
       <ParkList>

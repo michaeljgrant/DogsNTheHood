@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import styled from "styled-components/native";
 import { Avatar } from "react-native-paper";
-import { StatusBar } from "react-native";
+import { StatusBar, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   AuthButton,
   ButtonContainer,
@@ -33,12 +35,36 @@ const EditableArea = styled.View`
   margin-right: ${(props) => props.theme.space[2]};
   margin-top: ${(props) => props.theme.space[2]};
 `;
+
 export const Settings = ({ navigation }) => {
   const { onLogout, user } = useContext(LoginContext);
+  const [photo, setPhoto] = useState(null);
+
+  const getProfileAvatar = async (currentUser) => {
+    const photoUri = await AsyncStorage.getItem(`${currentUser.uid}-photo`);
+    setPhoto(photoUri);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      getProfileAvatar(user);
+    }, [user])
+  );
   return (
     <SafeArea>
       <ProfileHeader>
-        <Avatar.Image size={100} source={require("../../assets/Profile.jpg")} />
+        <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+          {!photo && (
+            <Avatar.Icon size={100} icon="human" backgroundColour="#CAE9FF" />
+          )}
+          {photo && (
+            <Avatar.Image
+              size={100}
+              source={{ uri: photo }}
+              backgroundColour="#CAE9FF"
+            />
+          )}
+        </TouchableOpacity>
         <UserName>{user.email}</UserName>
       </ProfileHeader>
       <EditableArea>

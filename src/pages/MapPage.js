@@ -27,24 +27,24 @@ const MapArea = styled(MapView)`
   height: 100%;
 `;
 export const MapPage = ({ navigation }) => {
-  const { keyword, search } = useContext(LocationContext);
-  const [searchKeyword, setSearchKeyword] = useState(keyword);
-  useEffect(() => {
-    setSearchKeyword(keyword);
-  }, [keyword]);
+  // const { keyword, search } = useContext(LocationContext);
+  // const [searchKeyword, setSearchKeyword] = useState(keyword);
+  // useEffect(() => {
+  //   setSearchKeyword(keyword);
+  // }, [keyword]);
   return (
     <SafeArea>
       <SearchBarContainer>
         <Searchbar
           icon="map"
           placeholder="Search"
-          value={searchKeyword}
-          onSubmitEditing={() => {
-            searchKeyword;
-          }}
-          onChangeText={(text) => {
-            setSearchKeyword(text);
-          }}
+          // value={searchKeyword}
+          // onSubmitEditing={() => {
+          //   searchKeyword;
+          // }}
+          // onChangeText={(text) => {
+          //   setSearchKeyword(text);
+          // }}
         />
       </SearchBarContainer>
       <MapArea
